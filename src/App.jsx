@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {SearchContext} from "./Hooks/useContext"
 import Header from "./layout/Header";
 import MovieCard from "./MovieCard";
