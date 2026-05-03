@@ -52,7 +52,7 @@ function Signup() {
 
     try {
       // TODO: Replace with your actual API endpoint
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch('https://movie-search-api-pjpd.onrender.com/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
