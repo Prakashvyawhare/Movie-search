@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:'http://localhost:3000/',
+    baseURL:'https://movie-search-api-pjpd.onrender.com/',
     withCredentials:true
 });
 const refreshApi = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://movie-search-api-pjpd.onrender.com/',
     withCredentials: true
 });
 
