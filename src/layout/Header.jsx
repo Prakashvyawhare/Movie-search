@@ -1,6 +1,6 @@
 import { useAuth } from "../Hooks/AuthContext"
 import Search from "./Search"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 function Header() {
@@ -8,13 +8,13 @@ function Header() {
     return (
      <nav className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto p-4 flex items-center justify-between">
-            <Link to='/' className="flex items-center gap-2">
+            <Link to='/home' className="flex items-center gap-2">
              <span className="text-2xl">🎬</span>
              <span className="text-xl font-bold text-white">Movie</span>
              <span className="text-yellow-400">Search</span>
             </Link>
             <div className="flex  item-center gap-8">
-                <Link to="/" > 
+                <Link to="/home" > 
                 Home</Link>
                 <Link to="/watchlist" className="">
                 <span className="flex items-center gap-2">
