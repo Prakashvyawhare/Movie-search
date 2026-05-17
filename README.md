@@ -1,16 +1,28 @@
-# React + Vite
+## High-Level Overview of Movie-search Repository
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Purpose**: A movie search web application built with React and Vite, allowing users to search for and discover movies.
 
-Currently, two official plugins are available:
+**Tech Stack**:
+- **Frontend Framework**: React 19 with Vite as the build tool
+- **Styling**: Tailwind CSS 4
+- **Routing**: React Router DOM 7
+- **HTTP Requests**: Axios for API calls
+- **Language**: JavaScript (98.9%) + minimal other
+- **Build Tools**: Vite with ESLint for code quality
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Key Details**:
+- **Status**: Recently created (14 days old), actively maintained (last push: May 17, 2026)
+- **License**: MIT
+- **Live Demo**: https://movie-search-prakashvyawhares-projects.vercel.app/
+- **Open Issues**: 1 currently open
+- **Repository Size**: 142 KB
 
-## React Compiler
+**Project Structure**:
+The app uses a modern React + Vite setup with:
+- Development and production build scripts
+- Hot Module Replacement (HMR) for fast development
+- ESLint for code linting
+- Tailwind CSS for utility-first styling
+- React Router for multi-page navigation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is a lightweight, modern movie search application ideal for exploring movie APIs and demonstrating React development skills with current tooling and best practices.
