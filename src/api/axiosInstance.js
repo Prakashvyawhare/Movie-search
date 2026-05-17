@@ -1,6 +1,6 @@
 import axios from "axios";
 // const url = "http://localhost:3000/"
-const url= 'https://movie-search-api-pjpd.onrender.com/'
+const url= import.meta.env.VITE_API_URL || 'https://movie-search-api-pjpd.onrender.com/'
 const api = axios.create({
     baseURL:url,
     withCredentials:true
