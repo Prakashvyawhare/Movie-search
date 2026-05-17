@@ -4,12 +4,12 @@ import Search from "../layout/Search";
 import MovieCard from "../MovieCard";
 
 
-const API_Key = import.meta.env.VITE_API_SECRET;
-const OMDB_API_URL = import.meta.env.OMDB_API_URL;
+const OMDB_API_KEY = import.meta.env.VITE_OMDB_API_KEY || '3dfb4e7e';
+const OMDB_API_URL = import.meta.env.VITE_OMDB_API_URL || 'https://www.omdbapi.com/';
 const DEFAULT_QUERY = 'avengers';
 function Home() {
     const [query, setQuery] = useState(DEFAULT_QUERY)
-    const url=query?`${OMDB_API_URL}?s=${encodeURIComponent(query)}&apikey=${API_Key}`:null;
+    const url=query?`${OMDB_API_URL}?s=${encodeURIComponent(query)}&apikey=${OMDB_API_KEY}`:null;
     const {data, isLoading, error} = UseFetch(url);
     const movies = data?.Search ||[]
     return(
