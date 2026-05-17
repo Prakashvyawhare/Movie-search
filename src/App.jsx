@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+
 import {SearchContext} from "./Hooks/useContext"
 import Header from "./layout/Header";
 import MovieCard from "./MovieCard";
 import UseFetch from "./Hooks/useFetch";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import MovieDetails from "./Pages/MovieDetail";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import { AuthProvider } from "./Hooks/AuthContext";
-import{WatchListProvider} from "./Hooks/WatchListContext"
+import{WatchListProvider} from "./Hooks/HookProvider/watchListProvider"
 import ProtectedRoute from "./auth/ProtectedRoutes"
 function AppContent() {
   // const [searchText, setSearchText] = useState('');
@@ -29,7 +29,7 @@ function AppContent() {
           <Route path="/home" element={<Home/>} ></Route>
           <Route path="/movie/:id" element={<MovieDetails/>} />
           </Route>
-          
+          <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
         </div>
       {/* </SearchContext.Provider> */}
