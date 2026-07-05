@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import {SearchContext}  from '../Hooks/useContext' 
+import {SearchContext}  from '../Hooks/useContext'
 
-function Search({setSearchEvent}) {
-    const [searchText, setSearchText] = useState('');
+function Search({setSearchEvent, query}) {
+    const [searchText, setSearchText] = useState(query || '');
     useEffect(()=> {
         const timer = setTimeout(() => {
             setSearchEvent(searchText)

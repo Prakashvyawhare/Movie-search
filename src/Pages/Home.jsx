@@ -1,17 +1,13 @@
 import { useState } from "react";
-import UseFetch from "../Hooks/useFetch";
+import { VirtuosoGrid } from "react-virtuoso";
+import UseMovieSearch from "../Hooks/useMovieSearch";
 import Search from "../layout/Search";
 import MovieCard from "../MovieCard";
 
-
-const OMDB_API_KEY = import.meta.env.VITE_OMDB_API_KEY || '3dfb4e7e';
-const OMDB_API_URL = import.meta.env.VITE_OMDB_API_URL || 'https://www.omdbapi.com/';
 const DEFAULT_QUERY = 'avengers';
 function Home() {
     const [query, setQuery] = useState(DEFAULT_QUERY)
-    const url=query?`${OMDB_API_URL}?s=${encodeURIComponent(query)}&apikey=${OMDB_API_KEY}`:null;
-    const {data, isLoading, error} = UseFetch(url);
-    const movies = data?.Search ||[]
+    const {movies, totalResults, isLoading, isLoadingMore, error, loadMore} = UseMovieSearch(query);
     return(
         <main className="max-w-6xl mx-auto px-4 py-10" >
             <div className="text-center mb-10">
@@ -23,11 +19,11 @@ function Home() {
                 </p>
             </div>
             <div className="mb-10">
-            <Search setSearchEvent={setQuery} />
+            <Search setSearchEvent={setQuery} query={query} />
             </div>
-            {data?.totalResults &&(
+            {totalResults>0 &&(
                 <p className="text-gray-400 text-sm mb-6">
-                    Found <span className="text-yellow-400 px-2 font-semibold">{data.totalResults}</span>
+                    Found <span className="text-yellow-400 px-2 font-semibold">{totalResults}</span>
                     results for " <span className="text-white">{query}</span>"
                 </p>
             )}
@@ -44,18 +40,31 @@ function Home() {
                     <p className="text-gray-500">Try a different search term</p>
                 </div>
             )}
-            {!isLoading && !query && (
+            {!isLoading && !query && movies.length === 0 && (
                 <div className="text-center py-24">
                   <p className="text-5xl mb-4">🔍</p>
                   <p className="text-gray-400 text-lg">Start typing to search for movies</p>
                 </div>
             )}
-            {!isLoading && data.totalResults && movies.length>0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" >
-                {movies.map((movie)=> (
-                        <MovieCard key={movie?.imdbID} movie={movie} />
-                ))}
-                    </div>
+            {!isLoading && !error && movies.length>0 && (
+                <VirtuosoGrid
+                    useWindowScroll
+                    totalCount={movies.length}
+                    overscan={400}
+                    endReached={loadMore}
+                    itemClassName="group relative bg-gray-900 rounded-xl overflow-hidden
+                 border border-gray-800 hover:border-yellow-400/50
+                 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/10"
+                    listClassName="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+                    itemContent={(index) => (
+                        <MovieCard movie={movies[index]} />
+                    )}
+                />
+            )}
+            {isLoadingMore && (
+                <div className="flex justify-center py-8">
+                    <div className="w-8 h-8 border-4 border-gray-700 border-t-yellow-400 rounded-full animate-spin"></div>
+                </div>
             )}
 
         </main>

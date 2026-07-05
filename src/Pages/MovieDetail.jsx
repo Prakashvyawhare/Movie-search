@@ -2,8 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import UseFetch from "../Hooks/useFetch";
 import { useWatchlist } from "../Hooks/WatchListContext";
 
-const API_Key = '3dfb4e7e';
-
+const OMDB_API_KEY = import.meta.env.VITE_OMDB_API_KEY || '3dfb4e7e';
+const OMDB_API_URL = import.meta.env.VITE_OMDB_API_URL || 'http://www.omdbapi.com/';
 function RatingBadge({ source, value }) {
   return (
     <div className="bg-gray-800 rounded-lg px-3 py-2 text-center min-w-[80px]">
@@ -25,7 +25,7 @@ function DetailRow({ label, value }) {
 function MovieDetails () {
     const {id} = useParams();
     const navigate = useNavigate();
-    const url=id?`http://www.omdbapi.com/?i=${id}&apikey=${API_Key}`:null;
+    const url=id?`${OMDB_API_URL}?i=${id}&apikey=${OMDB_API_KEY}`:null;
 
     const { data, error, isLoading } = UseFetch(url);
     const movie = data;
