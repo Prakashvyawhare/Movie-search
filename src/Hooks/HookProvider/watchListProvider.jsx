@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import api from "../../api/axiosInstance";
 import { WatcListContext} from '../WatchListContext'
+import { useAuth } from "../AuthContext";
 export function WatchListProvider ({children}) {
+    const { isAuthenticated } = useAuth();
 
     const [watchlist, setWatchList] = useState(()=> {
         const saved = localStorage.getItem('watchlist');
@@ -10,8 +12,11 @@ export function WatchListProvider ({children}) {
     });
 
     useEffect(()=>{
+        if (isAuthenticated) getWatchlist();
+    }, [isAuthenticated]);
+
+    useEffect(()=>{
         localStorage.setItem('watchlist',JSON.stringify(watchlist))
-       
     }, [watchlist]);
 
     function addToWatchlist(movie) {
@@ -40,11 +45,20 @@ export function WatchListProvider ({children}) {
     }
 
     function isInWatchlist(movie) {
-        return watchlist.some(m=> m.imdbID === movie.imdbID)
+        return watchlist?.some(m=> m?.imdbID === movie?.imdbID);
+    }
+    function getWatchlist() {
+        api.get('/watchlist/')
+        .then((res) => {
+            setWatchList(res.data.data);
+        }).catch(err => {
+            setWatchList([]);
+            console.error('Error fetching watchlist:', err);
+        });
     }
 
     return (
-        <WatcListContext.Provider value={{watchlist, addToWatchlist, removeFromWatchList, isInWatchlist}}>
+        <WatcListContext.Provider value={{watchlist, addToWatchlist, removeFromWatchList, isInWatchlist, getWatchlist}}>
             {children}
         </WatcListContext.Provider>
     )

@@ -1,6 +1,8 @@
 import axios from "axios";
-// const url = "http://localhost:3000/"
-const url= import.meta.env.VITE_API_URL || 'https://movie-search-api-pjpd.onrender.com/'
+const baseurl = "http://localhost:3000/"
+// const baseurl = 'https://movie-search-api-pjpd.onrender.com/'
+
+const url= import.meta.env.VITE_API_URL ||  baseurl
 const api = axios.create({
     baseURL:url,
     withCredentials:true
@@ -78,8 +80,10 @@ api.interceptors.response.use(
             //refresh failed session truely expired - forced logout 
                 processQue(err, null);
                 _accessToken = null;
-                _setAccessToken(null)
+                if (_setAccessToken) _setAccessToken(null)
+                if (window.location.pathname !== '/login') {
                     window.location.href = '/login';
+                }
                 return Promise.reject(err)
         }
         finally {

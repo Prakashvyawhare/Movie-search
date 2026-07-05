@@ -10,7 +10,8 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import { AuthProvider } from "./Hooks/AuthContext";
 import{WatchListProvider} from "./Hooks/HookProvider/watchListProvider"
-import ProtectedRoute from "./auth/ProtectedRoutes"
+import ProtectedRoute from "./auth/ProtectedRoutes";
+import WatchList from "./Pages/watchList";
 function AppContent() {
   // const [searchText, setSearchText] = useState('');
   const location = useLocation();
@@ -28,8 +29,9 @@ function AppContent() {
 
           <Route path="/home" element={<Home/>} ></Route>
           <Route path="/movie/:id" element={<MovieDetails/>} />
+          <Route path="/watchlist" element={<WatchList/>} />
           </Route>
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
         </div>
       {/* </SearchContext.Provider> */}
